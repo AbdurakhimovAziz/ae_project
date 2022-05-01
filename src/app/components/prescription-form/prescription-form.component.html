@@ -1,0 +1,37 @@
+<form class="form" [formGroup]="prescriptionForm">
+
+  <form class="search-form" (submit)="addMedicineForm(); $event.preventDefault()">
+    <mat-form-field class="form__field" appearance="fill">
+      <mat-label>Medicine</mat-label>
+      <input type="text" class="form__input" placeholder="Add one" aria-label="Number" matInput
+        [formControl]="medicineName" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <cdk-virtual-scroll-viewport itemSize="25" *ngIf="filteredOptions.length" class="autocomplete-viewport"
+          [ngStyle]="{'height': height}">
+          <mat-option *cdkVirtualFor="let option of filteredOptions" [value]="option.tradeName"
+            class="autocomplete-option">
+            {{option.tradeName}}
+          </mat-option>
+        </cdk-virtual-scroll-viewport>
+      </mat-autocomplete>
+    </mat-form-field>
+    <button mat-raised-button color="accent" type="submit">Add</button>
+  </form>
+
+  <div formArrayName="medicines" *ngFor="let m of medicines.controls; let i = index">
+    {{m.value.medicineName}}
+  </div>
+
+  <div class="form__footer">
+    <mat-form-field appearance="standard">
+      <mat-label>Patient's name</mat-label>
+      <input matInput placeholder="Enter patient's name" formControlName="name">
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Patient's phone</mat-label>
+      <input matInput placeholder="Enter Patient's phone number" formControlName="phone" type="tel">
+    </mat-form-field>
+
+    <button mat-raised-button class="form__submit-btn" type="submit" color="primary">Submit</button>
+  </div>
+</form>
