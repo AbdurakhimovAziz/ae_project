@@ -7,8 +7,38 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #fafafa;
 }
 a {
   text-decoration: none;
   color: #fff;
+}
+
+.mixed-field .mat-form-field-infix {
+  display: inherit;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  &.wrap {
+    flex-wrap: wrap;
+  }
+  & > * {
+    margin-right: 20px;
+  }
+}
+
+.flex-grow {
+  flex-grow: 1;
 }

@@ -9,6 +9,7 @@ import { AppMaterialModule } from './shared/modules/app-material.module';
 import { MainComponent } from './components/main/main.component';
 import { HeaderComponent } from './header/header.component';
 import { PrescriptionFormComponent } from './components/prescription-form/prescription-form.component';
+import { TruncatePipePipe } from './shared/pipes/truncate-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { PrescriptionFormComponent } from './components/prescription-form/prescr
     MainComponent,
     HeaderComponent,
     PrescriptionFormComponent,
+    TruncatePipePipe,
   ],
   imports: [
     BrowserModule,

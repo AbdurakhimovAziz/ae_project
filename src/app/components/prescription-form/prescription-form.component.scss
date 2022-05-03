@@ -1,6 +1,9 @@
 :host {
-  flex: 1 0 auto;
-  padding: 20px;
+  display: block;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
 }
 
 .form {
@@ -17,10 +20,35 @@
   }
 
   &__footer {
+    display: flex;
+    flex-direction: column;
     margin-top: auto;
+  }
+
+  &__medicines {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  &__medicines .mat-expansion-panel-header-title,
+  &__medicines .mat-expansion-panel-header-description {
+    flex-basis: 0;
+  }
+
+  &__medicines .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
   }
 }
 
 .autocomplete-option {
   height: 50px;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  &__btn {
+    align-self: flex-end;
+  }
 }

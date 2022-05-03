@@ -1,11 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, startWith, map } from 'rxjs';
 import { Medicine } from 'src/app/shared/models/medicine';
 import { MedicineService } from 'src/app/shared/services/medicine.service';
@@ -21,6 +15,8 @@ export class PrescriptionFormComponent implements OnInit {
   public medicineName = this.fb.control('');
   public filteredOptions!: Medicine[];
   public prescriptionForm!: FormGroup;
+  public frequencyOptions = ['day', 'week', 'month', 'year'];
+  public durationOptions = ['day(s)', 'week(s)', 'month(s)', 'year(s)'];
 
   constructor(
     private medicineService: MedicineService,
@@ -66,7 +62,6 @@ export class PrescriptionFormComponent implements OnInit {
     if (this.medicineName.value) {
       this.medicines.push(this.createMedicine(this.medicineName.value));
       this.medicineName.setValue('');
-      console.log(this.prescriptionForm.value);
     }
   }
 
@@ -77,15 +72,21 @@ export class PrescriptionFormComponent implements OnInit {
   private createMedicine(medName: string): FormGroup {
     return this.fb.group({
       medicineName: [medName],
-      quantity: ['', Validators.required],
-      duration: ['', Validators.required],
-      frequency: ['', Validators.required],
-      startDate: [''],
-      endDate: [''],
+      dosage: ['', Validators.required],
+      frequencyNum: [1, Validators.required],
+      frequencyVal: ['day', Validators.required],
+      durationNum: [1, Validators.required],
+      durationVal: ['day(s)', Validators.required],
     });
   }
 
   public removeMedicine(index: number): void {
     this.medicines.removeAt(index);
+  }
+
+  public submit(): void {
+    if (this.prescriptionForm.valid) {
+      console.log('Form Submitted');
+    }
   }
 }

@@ -1,37 +1,83 @@
-<form class="form" [formGroup]="prescriptionForm">
+<mat-card>
+  <mat-card-title>Prescription</mat-card-title>
+  <mat-card-content>
+    <form class="form" [formGroup]="prescriptionForm" (submit)="submit()">
 
-  <form class="search-form" (submit)="addMedicineForm(); $event.preventDefault()">
-    <mat-form-field class="form__field" appearance="fill">
-      <mat-label>Medicine</mat-label>
-      <input type="text" class="form__input" placeholder="Add one" aria-label="Number" matInput
-        [formControl]="medicineName" [matAutocomplete]="auto">
-      <mat-autocomplete #auto="matAutocomplete">
-        <cdk-virtual-scroll-viewport itemSize="25" *ngIf="filteredOptions.length" class="autocomplete-viewport"
-          [ngStyle]="{'height': height}">
-          <mat-option *cdkVirtualFor="let option of filteredOptions" [value]="option.tradeName"
-            class="autocomplete-option">
-            {{option.tradeName}}
-          </mat-option>
-        </cdk-virtual-scroll-viewport>
-      </mat-autocomplete>
-    </mat-form-field>
-    <button mat-raised-button color="accent" type="submit">Add</button>
-  </form>
+      <form class="search-form" (submit)="addMedicineForm(); $event.preventDefault()">
+        <mat-form-field class="form__field" appearance="fill">
+          <mat-label>Medicine</mat-label>
+          <input type="text" class="form__input" placeholder="Add one" aria-label="Number" matInput
+            [formControl]="medicineName" [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete">
+            <cdk-virtual-scroll-viewport itemSize="25" *ngIf="filteredOptions.length" class="autocomplete-viewport"
+              [ngStyle]="{'height': height}">
+              <mat-option *cdkVirtualFor="let option of filteredOptions" [value]="option.tradeName"
+                class="autocomplete-option">
+                {{option.tradeName}}
+              </mat-option>
+            </cdk-virtual-scroll-viewport>
+          </mat-autocomplete>
+        </mat-form-field>
+        <button mat-raised-button class="search-form__btn" color="accent" type="submit">Add</button>
+      </form>
 
-  <div formArrayName="medicines" *ngFor="let m of medicines.controls; let i = index">
-    {{m.value.medicineName}}
-  </div>
+      <mat-accordion class="form__medicines" multi>
+        <mat-expansion-panel formArrayName="medicines" *ngFor="let m of medicines.controls; let i = index">
+          <mat-expansion-panel-header>
+            <mat-panel-title [matTooltip]="m.value.medicineName"
+              [matTooltipDisabled]="m.value.medicineName.length <= 15">
+              {{m.value.medicineName | truncate: 15}}
+            </mat-panel-title>
+            <mat-panel-description>
+              Enter medicine details
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div formGroupName="{{i}}">
+            <div class="row wrap">
+              <mat-form-field appearance="outline" class="flex-grow">
+                <mat-label>Dosage</mat-label>
+                <input matInput type="text" formControlName="dosage" placeholder="Dosage" required />
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="mixed-field">
+                <mat-label>Frequency</mat-label>
+                <input matInput type="number" formControlName="frequencyNum" required min="0">
+                <span>/</span>
+                <mat-select name="frequency" formControlName="frequencyVal">
+                  <mat-option *ngFor="let f of frequencyOptions" [value]="f">{{f}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="mixed-field">
+                <mat-label>Duration</mat-label>
+                <input matInput type="number" placeholder="Enter duration" formControlName="durationNum" required
+                  min="0">
+                <mat-select formControlName="durationVal">
+                  <mat-option *ngFor="let d of durationOptions" [value]="d">{{d}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
 
-  <div class="form__footer">
-    <mat-form-field appearance="standard">
-      <mat-label>Patient's name</mat-label>
-      <input matInput placeholder="Enter patient's name" formControlName="name">
-    </mat-form-field>
-    <mat-form-field appearance="standard">
-      <mat-label>Patient's phone</mat-label>
-      <input matInput placeholder="Enter Patient's phone number" formControlName="phone" type="tel">
-    </mat-form-field>
-
-    <button mat-raised-button class="form__submit-btn" type="submit" color="primary">Submit</button>
-  </div>
-</form>
+      <div class="form__footer">
+        <div class="row wrap">
+          <mat-form-field appearance="outline" class="flex-grow">
+            <mat-label>Patient's name</mat-label>
+            <input matInput placeholder="Enter patient's name" formControlName="name" required>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="flex-grow">
+            <mat-label>Patient's phone</mat-label>
+            <input matInput placeholder="Enter Patient's phone number" formControlName="phone" type="tel" required>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field appearance="outline" class="flex-grow">
+            <mat-label>Additional comments</mat-label>
+            <textarea matInput placeholder="Leave additional information" formControlName="comments"></textarea>
+          </mat-form-field>
+        </div>
+        <button mat-raised-button class="form__submit-btn" type="submit" color="primary">Submit</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
