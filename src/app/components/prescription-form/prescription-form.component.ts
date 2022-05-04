@@ -1,5 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  FormGroupDirective,
+  Validators,
+} from '@angular/forms';
 import { Observable, startWith, map } from 'rxjs';
 import { Medicine } from 'src/app/shared/models/medicine';
 import { MedicineService } from 'src/app/shared/services/medicine.service';
@@ -17,6 +23,8 @@ export class PrescriptionFormComponent implements OnInit {
   public prescriptionForm!: FormGroup;
   public frequencyOptions = ['day', 'week', 'month', 'year'];
   public durationOptions = ['day(s)', 'week(s)', 'month(s)', 'year(s)'];
+
+  @ViewChild(FormGroupDirective) formGroupDirective!: FormGroupDirective;
 
   constructor(
     private medicineService: MedicineService,
@@ -87,6 +95,10 @@ export class PrescriptionFormComponent implements OnInit {
   public submit(): void {
     if (this.prescriptionForm.valid) {
       console.log('Form Submitted');
+      console.log(this.prescriptionForm.value);
+      this.medicines.clear();
+      this.prescriptionForm.reset();
+      this.formGroupDirective.resetForm();
     }
   }
 }

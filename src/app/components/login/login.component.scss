@@ -26,8 +26,17 @@
   &__btn {
     width: 100%;
     margin-top: 20px;
-    // background-color: ;
-    // color: $text-dark;
+  }
+
+  &__footer {
+    margin-top: 20px;
+    a {
+      color: #673ab7;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 }
 
