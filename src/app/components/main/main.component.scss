@@ -5,9 +5,11 @@
 }
 
 .content {
+  display: flex;
+  justify-content: space-between;
   height: 80vh;
   flex: 1 0 auto;
-  padding: 20px;
+  padding: 30px;
   margin-top: 56px;
   overflow-y: auto;
 }

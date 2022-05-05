@@ -38,6 +38,8 @@ export class RegisterComponent {
         this._snackBar.open('User registered successfully', 'x', {
           duration: 3000,
           panelClass: ['success'],
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
         });
       },
       error: (e) => {

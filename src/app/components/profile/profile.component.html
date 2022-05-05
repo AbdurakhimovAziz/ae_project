@@ -1,0 +1,48 @@
+<mat-card class="profile">
+  <mat-card-title class="profile__title">
+    Profile details
+  </mat-card-title>
+  <div class="profile__img">
+    <img src="../../../assets/images/doctor-avatar.webp" alt="">
+  </div>
+  <mat-card-content class="profile__content">
+    <mat-list role="list">
+      <mat-list-item role="listitem">
+        <span class="profile__property">
+          Name:
+        </span>
+        <span>
+          {{user?.firstName}} {{user?.lastName}}
+        </span>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <span class="profile__property">
+          Email:
+        </span>
+        <span>
+          {{user?.email || 'Not set'}}
+        </span>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <span class="profile__property">
+          Phone:
+        </span>
+        <span>
+          {{user?.phone || 'Not set'}}
+        </span>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <span class="profile__property">
+          Gender:
+        </span>
+        <span>
+          {{user?.gender || 'Not set'}}
+        </span>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+  <mat-divider></mat-divider>
+  <mat-card-actions class="profile__actions">
+    <button mat-flat-button color="accent" class="profile__btn">Edit</button>
+  </mat-card-actions>
+</mat-card>

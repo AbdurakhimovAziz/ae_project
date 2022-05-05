@@ -4,6 +4,8 @@ export interface User {
   password: string;
   firstName: string;
   lastName: string;
+  phone: string;
+  gender: string;
 }
 
 export interface UserForm {
